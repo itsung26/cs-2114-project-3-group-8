@@ -1,36 +1,31 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ViewTest {
-    Controller testApp;
-    PrintStream originalOut = System.out;
+    View testView;
     ByteArrayOutputStream redirectedOutputStream;
 
-    @BeforeAll
-    private void before() {
-        originalOut = System.out;
-    }
-
     @BeforeEach
-    private void setup() {
-        testApp = new Controller();
+    public void setup() {
+        testView = new View();
+        redirectedOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(redirectedOutputStream));
     }
 
     @Test
-    private void testDisplayWaitlist() {
-
+    public void testDisplayWaitlist() {
+        
     }
 
     @Test
-    private void testPrint() {
-
+    public void testPrint() {
+        testView.print("Hello World.");
+        // Compare the expected bytes with the printed bytes.
+        assertEquals("\033[H\033[2JHello World." + System.lineSeparator(), redirectedOutputStream.toString());
     }
-
-    @AfterAll
 }

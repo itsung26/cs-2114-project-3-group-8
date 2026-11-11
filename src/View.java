@@ -4,13 +4,12 @@ public class View {
 
     public void print(String string) {
         System.out.print(ANSI_WIPE);
-        // Flush IO stream to ensure print was comitted.
-        System.out.flush();
+        System.out.flush(); // Flush IO stream to ensure print was comitted.
 
         System.out.println(string);
     }
 
-    public void displayWaitlist() {
-
+    public void displayWaitlist(Queue waitlist) {
+        
     }
 }
