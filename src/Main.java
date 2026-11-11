@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println(View.class.getMethods());
+        Controller application = new Controller();
+        System.out.println((String)null);
+        // application.run();
     }
 }
