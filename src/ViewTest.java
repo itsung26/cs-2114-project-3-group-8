@@ -11,20 +11,20 @@ public class ViewTest {
     ByteArrayOutputStream redirectedOutputStream;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         testView = new View();
         redirectedOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(redirectedOutputStream));
     }
 
     @Test
-    public void testDisplayWaitlist() {
-        
+    void testDisplayWaitlist() {
+
     }
 
     @Test
-    public void testPrint() {
-        testView.print("Hello World.");
+    void testDisplay() {
+        testView.display("Hello World.");
         // Compare the expected bytes with the printed bytes.
         assertEquals("\033[H\033[2JHello World." + System.lineSeparator(), redirectedOutputStream.toString());
     }
