@@ -3,8 +3,8 @@
  * a party size.
  */
 public class Party {
-    private String name;
-    private int size;
+    private final String name;
+    private final int size;
 
     /**
      * Creates a party with the given name and size.
