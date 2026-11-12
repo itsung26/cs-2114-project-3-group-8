@@ -118,8 +118,8 @@ public class WaitlistQueue<T> {
      *
      * @return an array of the items currently in the queue
      */
-    public T[] toArray() {
-        T[] result = (T[]) new Object[size];
+    public Object[] toArray() {
+        Object[] result = new Object[size];
         Node<T> current = front;
         int index = 0;
         while (current != null) {
