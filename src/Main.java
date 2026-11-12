@@ -1,10 +1,8 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,7 +21,7 @@ public class Main extends Application {
      * When {@code true}, starts the JavaFX GUI; when {@code false}, runs the
      * text-based menu instead.
      */
-    private static final boolean GUI_MODE_ON = true;
+    private static final boolean GUI_MODE_ON = false;
 
     private View view;
     private Restaurant model;
@@ -48,7 +46,7 @@ public class Main extends Application {
      * Builds the MVC triad and starts the text-based menu loop.
      */
     private static void runConsole() {
-        Restaurant model = new Restaurant();
+        Restaurant model = new Restaurant("Test Restaurant");
         View view = new View();
         Controller controller = new Controller(model, view);
         controller.run();
@@ -60,7 +58,7 @@ public class Main extends Application {
      */
     @Override
     public void init() {
-        model = new Restaurant();
+        model = new Restaurant("Test Restaurant");
         view = new View();
         controller = new Controller(model, view);
     }
@@ -108,13 +106,16 @@ public class Main extends Application {
      *         converted to a URL
      */
     private URL getGuiBlueprintUrl() throws FileNotFoundException {
-        Path path = Paths.get("assets", "ui-blueprint", "ui-blueprint.fxml");
-        if (!Files.exists(path)) {
+        File file = new File("assets/ui-blueprint/ui-blueprint.fxml");
+        if (!file.exists()) {
             throw new FileNotFoundException("Failed to fetch ui blueprint file.");
         }
 
         try {
-            return path.toUri().toURL();
+            // Convert the File object to a URL pointing to a file.
+            // A URL must be passed to the fxml loader (the ui loader) for
+            // the UI to be loaded from the fxml.
+            return file.toURI().toURL();
         } catch (MalformedURLException e) {
             throw new FileNotFoundException("Failed to fetch ui blueprint file.");
         }

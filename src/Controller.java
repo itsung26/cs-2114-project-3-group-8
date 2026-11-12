@@ -1,7 +1,15 @@
-import java.util.List;
-class Controller {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
+
+public class Controller {
     private final Restaurant model;
     private final View view;
+
+    // Stores the 
+    @FXML
+    private VBox restaurantButtonBox;
+
     public Controller(Restaurant model, View view) {
         if (model == null || view == null) {
             throw new IllegalArgumentException(
@@ -10,7 +18,7 @@ class Controller {
         this.model = model;
         this.view = view;
     }
-    
+
     public void run() {
         boolean running = true;
         while (running) {
@@ -37,8 +45,8 @@ class Controller {
             }
         }
         view.display("Goodbye!");
+        System.exit(0);
     }
-
 
     // public void addParty() {
     //     if (model.toArray().size() >= 20) {

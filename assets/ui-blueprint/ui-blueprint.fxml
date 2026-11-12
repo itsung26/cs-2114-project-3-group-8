@@ -120,7 +120,7 @@
                                     <Font name="System Bold" size="18.0" fx:id="x121" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" style="&#10;" text="23" textAlignment="CENTER" wrapText="false">
+                              <Label alignment="CENTER" style="&#10;" text="4,231,375" textAlignment="CENTER" wrapText="false">
                                  <font>
                                     <Font size="18.0" fx:id="x1211" />
                                  </font>
@@ -134,6 +134,7 @@
             <VBox alignment="TOP_CENTER">
                <children>
             <Label alignment="CENTER" font="$x1" style="&#10;" text="Seating Map" textAlignment="CENTER" wrapText="false" />
+                  <Separator />
                </children>
             </VBox>
       </items>
