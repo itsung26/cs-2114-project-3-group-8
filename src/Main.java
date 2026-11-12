@@ -1,16 +1,40 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 /**
  * Application entry point for console and GUI modes.
+ * Acts as the composition root: it constructs the {@link Restaurant} model,
+ * {@link View}, and {@link Controller}, then either starts the console menu
+ * loop or launches JavaFX and wires the controller into the FXML loader.
  */
 public class Main extends Application {
+    /**
+     * When {@code true}, starts the JavaFX GUI; when {@code false}, runs the
+     * text-based menu instead.
+     */
     private static final boolean GUI_MODE_ON = true;
 
     private View view;
     private Restaurant model;
     private Controller controller;
 
+    /**
+     * Chooses console or GUI mode based on {@link #GUI_MODE_ON}.
+     *
+     * @param args command-line arguments (unused; forwarded to JavaFX when
+     *             GUI mode is on)
+     */
     public static void main(String[] args) {
         if (GUI_MODE_ON) {
             launch(args);
@@ -30,6 +54,10 @@ public class Main extends Application {
         controller.run();
     }
 
+    /**
+     * Creates the model, view, and controller used by the JavaFX application.
+     * Runs before {@link #start(Stage)}.
+     */
     @Override
     public void init() {
         model = new Restaurant();
@@ -37,9 +65,58 @@ public class Main extends Application {
         controller = new Controller(model, view);
     }
 
+    /**
+     * Loads the FXML layout, attaches the existing {@link Controller}, and
+     * asks the {@link View} to show it on the primary stage.
+     * On load failure, prints the stack trace and exits the JavaFX runtime.
+     *
+     * @param primaryStage the main application window provided by JavaFX
+     */
     @Override
     public void start(Stage primaryStage) {
-        view.constructGui(primaryStage);
+        System.out.println("hello world");
+        try {
+            FXMLLoader guiLoader = new FXMLLoader(getGuiBlueprintUrl());
+            guiLoader.setController(controller); // Required for @FXML to work in the controller.
+            Parent root = guiLoader.load();
+            view.showGui(primaryStage, root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Platform.exit();
+            return;
+        }
         view.clearTerminal();
+    }
+
+    /**
+     * Called when the JavaFX application is shutting down.
+     *
+     * @throws Exception if shutdown work fails
+     */
+    @Override
+    public void stop() throws Exception {
+        System.out.println("goodbye world");
+    }
+
+    /**
+     * Resolves the FXML layout file used to build the GUI.
+     * Looks for {@code assets/ui-blueprint/ui-blueprint.fxml} relative to
+     * the process working directory.
+     *
+     * @return a {@link URL} pointing to the FXML file
+     * @throws FileNotFoundException if the file is missing or cannot be
+     *         converted to a URL
+     */
+    private URL getGuiBlueprintUrl() throws FileNotFoundException {
+        Path path = Paths.get("assets", "ui-blueprint", "ui-blueprint.fxml");
+        if (!Files.exists(path)) {
+            throw new FileNotFoundException("Failed to fetch ui blueprint file.");
+        }
+
+        try {
+            return path.toUri().toURL();
+        } catch (MalformedURLException e) {
+            throw new FileNotFoundException("Failed to fetch ui blueprint file.");
+        }
     }
 }

@@ -1,14 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,23 +9,14 @@ public class View {
     private static final String ANSI_WIPE = "\033[H\033[2J";
     private final Scanner scanner = new Scanner(System.in);
 
-    public void constructGui(Stage stage) {
-        FXMLLoader guiLoader;
-        Parent root;
-        try {
-            guiLoader = new FXMLLoader(getGuiBlueprintUrl());
-            root = guiLoader.load();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Platform.exit();
-            return;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Platform.exit();
-            return;
-        }
+    /**
+     * Shows the given UI root on the primary stage.
+     *
+     * @param stage the application window
+     * @param root the loaded scene graph root
+     */
+    public void showGui(Stage stage, Parent root) {
         Scene scene = new Scene(root);
-
         stage.setTitle("waitlist");
         stage.setScene(scene);
         stage.show();
@@ -51,8 +33,8 @@ public class View {
         return scanner.nextLine().trim();
     }
 
-    public void display(String string) {
-        System.out.println(string);
+    public void display(Object object) {
+        System.out.println(object);
     }
 
     public void clearTerminal() {
@@ -102,28 +84,4 @@ public class View {
         }
         display(output.toString());
     }
-
-    /**
-     * Resolves the FXML layout file used to build the GUI.
-     * Looks for {@code assets/ui-blueprint/ui-blueprint.fxml} relative to
-     * the process working directory.
-     *
-     * @return a {@link URL} pointing to the FXML file
-     * @throws FileNotFoundException if the file is missing or cannot be
-     *         converted to a URL
-     */
-    private URL getGuiBlueprintUrl() throws FileNotFoundException {
-        Path path = Paths.get("assets", "ui-blueprint", "ui-blueprint.fxml");
-        if (!Files.exists(path)) {
-            throw new FileNotFoundException("Failed to fetch ui blueprint file.");
-        }
-
-        try {
-            return path.toUri().toURL();
-        } catch (MalformedURLException e) {
-            throw new FileNotFoundException("Failed to fetch ui blueprint file.");
-        }
-    }
-
-
 }
