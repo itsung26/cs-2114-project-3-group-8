@@ -79,4 +79,4 @@ Isaac - GUI and save/loading and smart seating algorithims.
 
 ### GenAI Note
 
-GenAI was used to aid in writing documentation for classes, as well as managing the gitignore. It was also used to write `src/WaitlistQueue.java` and `src/WaitlistQueueTest.java`.
+GenAI was used to aid in writing documentation for classes, as well as managing the gitignore.
