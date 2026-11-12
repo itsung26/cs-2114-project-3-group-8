@@ -18,105 +18,106 @@ class Controller {
             view.showMenu();
             int choice = readInt("Choose an option", 1, 6);
             if (choice == 1) {
-                addParty();
+                // addParty();
+                model.addPartyToWaitlist(new Party("Demo party", 5));
             }
             else if (choice == 2) {
-                seatNextParty();
+                // seatNextParty();
             }
             else if (choice == 3) {
-                clearTable();
+                // clearTable();
             }
             else if (choice == 4) {
-                showWaitlist();
+                view.displayWaitlist(model.getWaitlistSnapshot());
             }
             else if (choice == 5) {
-                showTables();
+                // showTables();
             }
             else if (choice == 6) {
                 running = false;
             }
         }
-        view.showMessage("Goodbye!");
+        view.display("Goodbye!");
     }
 
 
-    public void addParty() {
-        if (model.getWaitlistSnapshot().size() >= 20) {
-            view.showMessage("The waitlist is full (max " + 20
-                + " parties). Seat a party before adding another.");
-            return;
-        }
-        String name = readNonEmptyString("Enter party name");
-        int size = readInt("Enter party size", 1, 8);
-        try {
-            model.addParty(new Party(name, size));
-            view.showMessage("Added party \"" + name + "\" (size " + size
-                + ") to the waitlist.");
-        }
-        catch (IllegalArgumentException e) {
-            view.showMessage("Could not add party: " + e.getMessage());
-        }
-    }
+    // public void addParty() {
+    //     if (model.toArray().size() >= 20) {
+    //         view.display("The waitlist is full (max " + 20
+    //             + " parties). Seat a party before adding another.");
+    //         return;
+    //     }
+    //     String name = readNonEmptyString("Enter party name");
+    //     int size = readInt("Enter party size", 1, 8);
+    //     try {
+    //         model.addParty(new Party(name, size));
+    //         view.display("Added party \"" + name + "\" (size " + size
+    //             + ") to the waitlist.");
+    //     }
+    //     catch (IllegalArgumentException e) {
+    //         view.display("Could not add party: " + e.getMessage());
+    //     }
+    // }
 
 
-    public void seatNextParty() {
-        if (model.seatNextParty()) {
-            view.showMessage("The next party has been seated.");
-        }
-        else if (model.getWaitlistSnapshot().isEmpty()) {
-            view.showMessage("There is no party to seat in the waitlist.");
-        }
-        else {
-            view.showMessage("No tables are available right now.");
-        }
-    }
+    // public void seatNextParty() {
+    //     if (model.seatNextParty()) {
+    //         view.display("The next party has been seated.");
+    //     }
+    //     else if (model.getWaitlistSnapshot().isEmpty()) {
+    //         view.display("There is no party to seat in the waitlist.");
+    //     }
+    //     else {
+    //         view.display("No tables are available right now.");
+    //     }
+    // }
 
 
-    public void clearTable() {
-        int numTables = model.getTables().size();
-        int tableNumber = readInt("Enter the table number to clear", 1,
-            numTables);
+    // public void clearTable() {
+    //     int numTables = model.getTables().size();
+    //     int tableNumber = readInt("Enter the table number to clear", 1,
+    //         numTables);
 
-        if (model.clearTable(tableNumber)) {
-            view.showMessage("Table " + tableNumber
-                + " is now clean and available.");
-        }
-        else {
-            view.showMessage("Table " + tableNumber + " is already empty.");
-        }
-    }
-
-
-    public void showWaitlist() {
-        List<Party> waitlist = model.getWaitlistSnapshot();
-        if (waitlist.isEmpty()) {
-            view.showMessage("The waitlist is empty.");
-        }
-        else {
-            view.showWaitlist(waitlist);
-        }
-    }
+    //     if (model.clearTable(tableNumber)) {
+    //         view.display("Table " + tableNumber
+    //             + " is now clean and available.");
+    //     }
+    //     else {
+    //         view.display("Table " + tableNumber + " is already empty.");
+    //     }
+    // }
 
 
-    public void showTables() {
-        view.showTables(model.getTables());
-    }
+    // public void showWaitlist() {
+    //     Party[] waitlist = model.getWaitlistSnapshot();
+    //     if (waitlist.length == 0) {
+    //         view.display("The waitlist is empty.");
+    //     }
+    //     else {
+    //         view.displayWaitlist(waitlist);
+    //     }
+    // }
+
+
+    // public void showTables() {
+    //     view.showTables(model.getTables());
+    // }
 
 
     private int readInt(String prompt, int min, int max) {
         String fullPrompt = prompt + " (" + min + "-" + max + ")";
         while (true) {
-            String input = view.readLine(fullPrompt);
+            String input = view.readInput(fullPrompt);
             try {
                 int value = Integer.parseInt(input.trim());
                 if (value >= min && value <= max) {
                     return value;
                 }
-                view.showMessage("Input must be between " + min + " and " + max
+                view.display("Input must be between " + min + " and " + max
                     + ".");
             }
             catch (NumberFormatException e) {
-                view.showMessage("Please enter a whole number between " + min
+                view.display("Please enter a whole number between " + min
                     + " and " + max + ".");
             }
         }
@@ -125,9 +126,9 @@ class Controller {
 
     private String readNonEmptyString(String prompt) {
         while (true) {
-            String input = view.readLine(prompt);
+            String input = view.readInput(prompt);
             if (input.isBlank()) {
-                view.showMessage("Entry cannot be empty. Please try again.");
+                view.display("Entry cannot be empty. Please try again.");
             }
             else {
                 return input.trim();

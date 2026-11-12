@@ -17,9 +17,6 @@ public class View {
     }
 
     public void display(String string) {
-        System.out.print(ANSI_WIPE);
-        System.out.flush(); // Flush IO stream to ensure print was comitted.
-
         System.out.println(string);
     }
 
@@ -42,8 +39,29 @@ public class View {
             + "6. Quit");
     }
 
+    /**
+     * Shows the waitlist in order, with each party's name and size.
+     *
+     * @param waitlist the parties currently waiting, front first
+     */
     public void displayWaitlist(Party[] waitlist) {
-        System.out.println(waitlist);
+        if (waitlist == null || waitlist.length == 0) {
+            display("The waitlist is empty.");
+            return;
+        }
+
+        StringBuilder output = new StringBuilder("Current Waitlist:");
+        for (int i = 0; i < waitlist.length; i++) {
+            Party party = waitlist[i];
+            output.append(System.lineSeparator())
+                .append(i + 1)
+                .append(". ")
+                .append(party.getName())
+                .append(" (")
+                .append(party.getSize())
+                .append(party.getSize() == 1 ? " person)" : " people)");
+        }
+        display(output.toString());
     }
 
 

@@ -2,11 +2,11 @@ public class Restaurant {
     private final int DEFAULT_TABLE_COUNT = 12;
     private final int DEFAULT_CAPACITY_PER_TABLE = 4;
 
-    private final Queue<Party> waitlistQueue;
+    private final WaitlistQueue<Party> waitlistQueue;
     private final Table[] tables;
 
     public Restaurant() {
-        waitlistQueue = new Queue<Party>();
+        waitlistQueue = new WaitlistQueue<Party>();
         tables = new Table[DEFAULT_TABLE_COUNT];
 
         // Populate tables array.
@@ -16,11 +16,27 @@ public class Restaurant {
         }
     }
 
+    public Table[] getTables() {
+        return tables;
+    }
+
     public void addPartyToWaitlist(Party party) {
-        // TODO: Enqueue a party.
+        if (party == null) {
+            throw new IllegalArgumentException();
+        }
+        waitlistQueue.enqueue(party);
     }
 
     public void seatNextParty() {
         // TODO: Seat the next party in the waitlist.
+    }
+
+    public Party[] getWaitlistSnapshot() {
+        Object[] waitlist = waitlistQueue.toArray();
+        Party[] snapshot = new Party[waitlist.length];
+        for (int i = 0; i < waitlist.length; i++) {
+            snapshot[i] = (Party) waitlist[i];
+        }
+        return snapshot;
     }
 }

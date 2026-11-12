@@ -67,7 +67,6 @@ Isaac - GUI and save/loading and smart seating algorithims.
 | `src/Party.java`      | Isaac        | author      |
 | `src/PartyTest.java`  | Isaac        | author      |
 | `src/Table.java`      | Isaac        | author      |
-| `src/Queue.java`      |              |             |
 | `src/WaitlistQueue.java`     | Alex         | author      |
 | `src/WaitlistQueueTest.java` | Alex         | author      |
 | `src/Restaurant.java` | Isaac        | author      |
