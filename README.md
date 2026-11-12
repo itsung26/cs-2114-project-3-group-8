@@ -68,13 +68,15 @@ Isaac - GUI and save/loading and smart seating algorithims.
 | `src/PartyTest.java`  | Isaac        | author      |
 | `src/Table.java`      | Isaac        | author      |
 | `src/Queue.java`      |              |             |
+| `src/WaitlistQueue.java`     | Alex         | author      |
+| `src/WaitlistQueueTest.java` | Alex         | author      |
 | `src/Restaurant.java` | Isaac        | author      |
 | `src/View.java`       | Isaac        | author      |
 | `src/ViewTest.java`   | Isaac        | author      |
 | `src/Controller.java` |              |             |
 | `src/Main.java`       | Isaac        | author      |
-| `README.md`           | Isaac        | contributor |
+| `README.md`           | Isaac, Alex  | contributor |
 
 ### GenAI Note
 
-GenAI was used to aid in writing documentation for classes, as well as managing the gitignore.
+GenAI was used to aid in writing documentation for classes, as well as managing the gitignore. It was also used to write `src/WaitlistQueue.java` and `src/WaitlistQueueTest.java`.
