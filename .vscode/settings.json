@@ -1,0 +1,23 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": {
+    "include": [
+      "lib/*.jar",
+      "lib/javafx-sdk-25.0.5/lib/*.jar"
+    ],
+    "exclude": [
+      "lib/javafx-docs/**"
+    ],
+    "sources": {
+      "lib/javafx-sdk-25.0.5/lib/javafx.base.jar": "lib/javafx-docs/javafx-base-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.controls.jar": "lib/javafx-docs/javafx-controls-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.fxml.jar": "lib/javafx-docs/javafx-fxml-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.graphics.jar": "lib/javafx-docs/javafx-graphics-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.media.jar": "lib/javafx-docs/javafx-media-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.swing.jar": "lib/javafx-docs/javafx-swing-25.0.5-sources.jar",
+      "lib/javafx-sdk-25.0.5/lib/javafx.web.jar": "lib/javafx-docs/javafx-web-25.0.5-sources.jar"
+    }
+  },
+  "java.debug.settings.vmArgs": "--module-path \"${workspaceFolder}/lib/javafx-sdk-25.0.5/lib\" --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
+}

@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Run Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "cwd": "${workspaceFolder}",
+      "classPaths": [
+        "${workspaceFolder}/bin"
+      ],
+      "modulePaths": [
+        "${workspaceFolder}/lib/javafx-sdk-25.0.5/lib"
+      ],
+      "vmArgs": "--add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
+    }
+  ]
+}

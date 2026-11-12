@@ -41,7 +41,6 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -89,15 +88,49 @@
                   </VBox>
               </items>
             </SplitPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Restaurant Details" textAlignment="CENTER" wrapText="false">
+            <VBox>
+               <children>
+            <Label alignment="CENTER" prefWidth="-1.0" style="&#10;" text="Restaurant Details" textAlignment="CENTER" wrapText="false">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
             </Label>
-          </children>
-        </AnchorPane>
+                  <Separator />
+                  <Separator opacity="0.0" prefHeight="241.0" prefWidth="363.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox spacing="5.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label alignment="CENTER" style="&#10;" text="Restaurant Name:" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" fx:id="x12" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" style="&#10;" text="Olive Garden" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" fx:id="x121" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox spacing="5.0">
+                           <children>
+                              <Label alignment="CENTER" style="&#10;" text="Table count:" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" fx:id="x121" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" style="&#10;" text="23" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" fx:id="x1211" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
             <VBox alignment="TOP_CENTER">
                <children>
             <Label alignment="CENTER" font="$x1" style="&#10;" text="Seating Map" textAlignment="CENTER" wrapText="false" />
