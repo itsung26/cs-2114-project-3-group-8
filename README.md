@@ -73,9 +73,9 @@ Isaac - GUI and save/loading and smart seating algorithims.
 | `src/Restaurant.java` | Isaac        | author      |
 | `src/View.java`       | Isaac        | author      |
 | `src/ViewTest.java`   | Isaac        | author      |
-| `src/Controller.java` |              |             |
+| `src/Controller.java` | Mehul        | author      |
 | `src/Main.java`       | Isaac        | author      |
-| `README.md`           | Isaac, Alex  | contributor |
+| `README.md`           | Isaac, Alex, Mehul  | contributor |
 
 ### GenAI Note
 
