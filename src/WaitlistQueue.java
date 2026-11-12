@@ -55,6 +55,28 @@ public class WaitlistQueue<T> {
     }
 
     /**
+     * Returns the item at the front of the queue without removing it.
+     *
+     * @return the item at the front
+     * @throws IllegalStateException if the queue is empty
+     */
+    public T getFront() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty.");
+        }
+        return front.data;
+    }
+
+    /**
+     * Removes every item from the queue.
+     */
+    public void clear() {
+        front = null;
+        rear = null;
+        size = 0;
+    }
+
+    /**
      * Returns whether the queue has no items in it.
      *
      * @return true if the queue is empty, false otherwise
@@ -70,6 +92,25 @@ public class WaitlistQueue<T> {
      */
     public int getSize() {
         return size;
+    }
+
+    /**
+     * Returns a string listing the items from front to rear.
+     *
+     * @return a string in the form {@code [first, second, third]}
+     */
+    @Override
+    public String toString() {
+        String result = "[";
+        Node<T> current = front;
+        while (current != null) {
+            result = result + current.data;
+            if (current.next != null) {
+                result = result + ", ";
+            }
+            current = current.next;
+        }
+        return result + "]";
     }
 
     /**
