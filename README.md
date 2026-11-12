@@ -2,6 +2,8 @@
 
 ## How to Run
 
+Run Main in Main.java. press 1 to add a test party to the waitlist. Press 4 to display all parties in the waitlist and see your changes.
+
 ## Reflection
 
 ### What changed from the specification?
