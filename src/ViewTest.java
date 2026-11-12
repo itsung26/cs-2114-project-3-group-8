@@ -19,7 +19,6 @@ public class ViewTest {
 
     @Test
     void testDisplayWaitlist() {
-
     }
 
     @Test
