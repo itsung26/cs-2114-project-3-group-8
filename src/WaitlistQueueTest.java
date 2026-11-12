@@ -192,6 +192,36 @@ public class WaitlistQueueTest {
     }
 
     /**
+     * Verifies that {@link WaitlistQueue#toArray()} returns a zero-length
+     * array when the queue is empty.
+     */
+    @Test
+    void testToArrayEmpty() {
+        Object[] result = queue.toArray();
+        assertEquals(0, result.length);
+    }
+
+    /**
+     * Verifies that {@link WaitlistQueue#toArray()} returns the items from
+     * front to rear without changing the queue.
+     */
+    @Test
+    void testToArray() {
+        queue.enqueue("A");
+        queue.enqueue("B");
+        queue.enqueue("C");
+
+        Object[] result = queue.toArray();
+        assertEquals(3, result.length);
+        assertEquals("A", result[0]);
+        assertEquals("B", result[1]);
+        assertEquals("C", result[2]);
+
+        assertEquals(3, queue.getSize());
+        assertEquals("A", queue.getFront());
+    }
+
+    /**
      * Verifies that the queue works with {@link Party} objects, the type
      * the restaurant waitlist holds.
      */

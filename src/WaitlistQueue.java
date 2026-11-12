@@ -114,6 +114,23 @@ public class WaitlistQueue<T> {
     }
 
     /**
+     * Returns a new array containing the items from front to rear.
+     *
+     * @return an array of the items currently in the queue
+     */
+    public T[] toArray() {
+        T[] result = (T[]) new Object[size];
+        Node<T> current = front;
+        int index = 0;
+        while (current != null) {
+            result[index] = current.data;
+            index++;
+            current = current.next;
+        }
+        return result;
+    }
+
+    /**
      * A single node in the linked chain. Holds one item and a
      * reference to the node behind it in line.
      *
