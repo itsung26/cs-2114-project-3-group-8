@@ -10,7 +10,6 @@ class Controller {
         this.model = model;
         this.view = view;
     }
-
     
     public void run() {
         boolean running = true;
