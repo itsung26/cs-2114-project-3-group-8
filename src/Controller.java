@@ -1,3 +1,5 @@
+import javax.naming.OperationNotSupportedException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -25,7 +27,13 @@ public class Controller {
                 model.addPartyToWaitlist(new Party("Demo party", 5));
             }
             else if (choice == 2) {
-                model.seatNextParty();
+                try {
+                    model.seatNextParty();
+                    view.display("The next party has been seated.");
+                }
+                catch (OperationNotSupportedException e) {
+                    view.display(e.getMessage());
+                }
             }
             else if (choice == 3) {
                 // clearTable();
