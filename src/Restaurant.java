@@ -4,10 +4,10 @@ import java.util.Arrays;
 import javax.naming.OperationNotSupportedException;
 
 /**
- * Represents the model - a restaurant with a name, queue of parties,
- * and array of tables. Will eventually be fully serializable in the future to
- * allow for save/load capability. Will also be swappable at runtime in the
- * future.
+ * The restaurant model: a named collection of tables and a waitlist of
+ * {@link Party} parties. Defaults to 12 tables of capacity 4 each.
+ * Intended to become fully serializable for save/load and swappable at
+ * runtime in the future.
  */
 public class Restaurant {
     private final int DEFAULT_TABLE_COUNT = 12;
@@ -17,6 +17,12 @@ public class Restaurant {
     private final WaitlistQueue<Party> waitlistQueue;
     private final Table[] tables;
 
+    /**
+     * Creates a restaurant with the given name, an empty waitlist, and
+     * the default set of vacant tables numbered starting at 1.
+     *
+     * @param name the restaurant name, or {@code null} to use an empty string
+     */
     public Restaurant(String name) {
         waitlistQueue = new WaitlistQueue<Party>();
         tables = new Table[DEFAULT_TABLE_COUNT];
@@ -30,10 +36,21 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Returns the tables in this restaurant.
+     *
+     * @return the live table array; callers that mutate it affect this restaurant
+     */
     public Table[] getTables() {
         return tables;
     }
 
+    /**
+     * Adds a party to the end of the waitlist.
+     *
+     * @param party the party to enqueue; must not be {@code null}
+     * @throws IllegalArgumentException if {@code party} is {@code null}
+     */
     public void addPartyToWaitlist(Party party) {
         if (party == null) {
             throw new IllegalArgumentException();
@@ -42,10 +59,13 @@ public class Restaurant {
     }
 
     /**
-     * Finds the best fit table for the next party and seats them. Returns true if
-     * seating was successful and false otherwise.
-     * 
-     * @return
+     * Seats the next party from the front of the waitlist at the best-fit
+     * vacant table. Prefers an exact capacity match; otherwise uses the
+     * smallest vacant table whose capacity still exceeds the party size.
+     * The waitlist is unchanged if seating fails.
+     *
+     * @throws OperationNotSupportedException if the waitlist is empty, or if no
+     *                                        vacant table can fit the next party
      */
     public void seatNextParty() throws OperationNotSupportedException {
         if (waitlistQueue.size() < 1) {
@@ -84,6 +104,13 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Returns a snapshot of the parties currently on the waitlist, in
+     * front-to-rear order. The returned array is a copy; mutating it does
+     * not affect the waitlist.
+     *
+     * @return a new array of parties on the waitlist; empty if none are waiting
+     */
     public Party[] getWaitlistSnapshot() {
         Object[] waitlist = waitlistQueue.toArray();
         Party[] snapshot = new Party[waitlist.length];
@@ -98,7 +125,8 @@ public class Restaurant {
      * If any vacant table can fit the party, the wait is {@code 0}. Otherwise the
      * wait is the shortest estimated remaining dining time among occupied tables
      * that can fit the party, using {@link #getDiningTimeEstimate(int)} for the
-     * seated party's size.
+     * seated party's size. If no table can fit the party at all, returns the
+     * dining-time estimate for {@code partySize} itself.
      *
      * @param partySize the number of people in the party
      * @return the estimated wait time in minutes
