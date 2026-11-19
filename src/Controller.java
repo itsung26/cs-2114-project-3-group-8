@@ -21,27 +21,24 @@ public class Controller {
         boolean running = true;
         while (running) {
             view.showMenu();
-            int choice = readInt("Choose an option", 1, 7);
+            int choice = readInt("Choose an option", 1, 6);
             if (choice == 1) {
+                // addParty();
                 model.addPartyToWaitlist(new Party("Demo party", 5));
             } else if (choice == 2) {
-                int partySize = readInt("Enter party size", 1, 8);
-                int waitTime = model.getWaitTimeEstimate(partySize);
-                view.display("Estimated wait time: " + waitTime + " minutes.");
-            } else if (choice == 3) {
                 try {
                     model.seatNextParty();
                     view.display("The next party has been seated.");
                 } catch (OperationNotSupportedException e) {
                     view.display(e.getMessage());
                 }
-            } else if (choice == 4) {
+            } else if (choice == 3) {
                 // clearTable();
-            } else if (choice == 5) {
+            } else if (choice == 4) {
                 view.displayWaitlist(model.getWaitlistSnapshot());
-            } else if (choice == 6) {
+            } else if (choice == 5) {
                 // showTables();
-            } else if (choice == 7) {
+            } else if (choice == 6) {
                 running = false;
             }
         }

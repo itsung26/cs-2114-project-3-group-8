@@ -45,23 +45,19 @@ public class View {
      * Clears the screen and shows the main menu options.
      */
     public void showMenu() {
-        display(
-            "Restaurant Waitlist Menu"
+        display("Restaurant Waitlist Menu"
             + System.lineSeparator()
-            + "1. Add a party to waitlist"
+            + "1. Add a party"
             + System.lineSeparator()
-            + "2. Get current waiting time"
+            + "2. Seat next party"
             + System.lineSeparator()
-            + "3. Seat next party"
+            + "3. Clear a table"
             + System.lineSeparator()
-            + "4. Clear a table"
+            + "4. Show waitlist"
             + System.lineSeparator()
-            + "5. Show waitlist"
+            + "5. Show tables"
             + System.lineSeparator()
-            + "6. Show tables"
-            + System.lineSeparator()
-            + "7. Quit"
-        );
+            + "6. Quit");
     }
 
     /**
