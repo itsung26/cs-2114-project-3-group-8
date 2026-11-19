@@ -3,6 +3,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,11 +81,11 @@ public class WaitlistQueueTest {
 
     /**
      * Verifies that {@link WaitlistQueue#dequeue()} on an empty queue throws
-     * {@link IllegalStateException}.
+     * {@link NoSuchElementException}.
      */
     @Test
     void testDequeueEmptyThrows() {
-        assertThrows(IllegalStateException.class, () -> queue.dequeue());
+        assertThrows(NoSuchElementException.class, () -> queue.dequeue());
     }
 
     /**
@@ -132,11 +134,11 @@ public class WaitlistQueueTest {
 
     /**
      * Verifies that {@link WaitlistQueue#getFront()} on an empty queue throws
-     * {@link IllegalStateException}.
+     * {@link NoSuchElementException}.
      */
     @Test
     void testGetFrontEmptyThrows() {
-        assertThrows(IllegalStateException.class, () -> queue.getFront());
+        assertThrows(NoSuchElementException.class, () -> queue.getFront());
     }
 
     /**
@@ -150,7 +152,7 @@ public class WaitlistQueueTest {
 
         assertTrue(queue.isEmpty());
         assertEquals(0, queue.getSize());
-        assertThrows(IllegalStateException.class, () -> queue.dequeue());
+        assertThrows(NoSuchElementException.class, () -> queue.dequeue());
     }
 
     /**
