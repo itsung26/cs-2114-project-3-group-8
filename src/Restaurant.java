@@ -1,4 +1,7 @@
+import java.rmi.server.Operation;
 import java.util.Arrays;
+
+import javax.naming.OperationNotSupportedException;
 
 /**
  * Represents the model - a restaurant with a name, queue of parties,
@@ -44,29 +47,41 @@ public class Restaurant {
      * 
      * @return
      */
-    public boolean seatNextParty() {
+    public void seatNextParty() throws OperationNotSupportedException {
+        if (waitlistQueue.size() < 1) {
+            throw new OperationNotSupportedException("Cannot seat next party: waitlist is empty.");
+        }
+
         // Only modifies the queue when neccessary.
         Party peeked = waitlistQueue.getFront();
+        boolean seated = false;
 
         // First iteration: check for perfectly matching table size to party size.
         for (Table table : tables) {
             if (!table.isOccupied() && table.getCapacity() == peeked.getSize()) {
                 table.setSeatedParty(waitlistQueue.dequeue());
-                return true;
+                seated = true;
+                break;
             }
         }
 
         // Second iteration: check for table with smallest capacity that can still fit
         // the party.
-        Table[] sortedCopy = sortByTableCapacity(tables);
-        for (Table table : sortedCopy) {
-            if (!table.isOccupied() && table.getCapacity() > peeked.getSize()) {
-                table.setSeatedParty(waitlistQueue.dequeue());
-                return true;
+        if (!seated) {
+            Table[] sortedCopy = sortByTableCapacity(tables);
+            for (Table table : sortedCopy) {
+                if (!table.isOccupied() && table.getCapacity() > peeked.getSize()) {
+                    table.setSeatedParty(waitlistQueue.dequeue());
+                    seated = true;
+                    break;
+                }
             }
         }
-        
-        return false;
+
+        if (!seated) {
+            throw new OperationNotSupportedException(
+                    "Cannot seat next party: no available table can fit the party.");
+        }
     }
 
     public Party[] getWaitlistSnapshot() {

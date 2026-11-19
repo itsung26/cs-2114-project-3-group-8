@@ -25,7 +25,7 @@ public class Controller {
                 model.addPartyToWaitlist(new Party("Demo party", 5));
             }
             else if (choice == 2) {
-                // seatNextParty();
+                model.seatNextParty();
             }
             else if (choice == 3) {
                 // clearTable();
