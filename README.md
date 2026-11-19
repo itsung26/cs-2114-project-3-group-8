@@ -40,6 +40,8 @@ Smart restaurant seating logic. The restaurant model does not yet seat customers
 
 ### What is left to finish the MVP?
 
+1. Implement unfinished logic in the controller's run() method.
+2. Complete unit tests for Controller.java
 
 
 ### Change feature (Deliverable 4)
@@ -68,11 +70,11 @@ Isaac - GUI and save/loading and smart seating algorithims.
 
 #### How did your design absorb the change?
 
-
+The change was primarily focused on the model, so it was simple to add onto the model's existing behavior. The controller already had most of the control logic stubbed out, so it was also simple to implement the updated model into the existing controller API.
 
 #### Did the change cross the model/view line?
 
-
+The change did not cross the model/view line. The model and view were able to remain completely seperate and do not have direct access to each other. Only Main, the program entry point and the Controller have access to both classes.
 
 #### What changed from your D3 plan?
 
@@ -102,7 +104,10 @@ Committing: MVP completeness and GUI, as well as saving and loading.
 
 #### What will your 3-minute demo show?
 
-
+- Adding parties to the waitlist
+- Seating parties at tables
+- The non-trivial feature of wait time estimation
+- Stretch features if present including GUI and save/load
 
 #### Who does what?
 
@@ -117,9 +122,11 @@ Committing: MVP completeness and GUI, as well as saving and loading.
 | `src/Party.java`      | Isaac        | author      |
 | `src/PartyTest.java`  | Isaac        | author      |
 | `src/Table.java`      | Isaac        | author      |
+| `src/TableTest.java` | Isaac | author|
 | `src/WaitlistQueue.java`     | Alex         | author      |
 | `src/WaitlistQueueTest.java` | Alex         | author      |
 | `src/Restaurant.java` | Isaac        | author      |
+| `src.RestaurantTest.java` | Isaac | author|
 | `src/View.java`       | Isaac        | author      |
 | `src/ViewTest.java`   | Isaac        | author      |
 | `src/Controller.java` | Mehul        | author      |
