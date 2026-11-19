@@ -6,10 +6,6 @@ public class Controller {
     private final Restaurant model;
     private final View view;
 
-    // Stores the 
-    @FXML
-    private VBox restaurantButtonBox;
-
     public Controller(Restaurant model, View view) {
         if (model == null || view == null) {
             throw new IllegalArgumentException(
