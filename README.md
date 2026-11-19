@@ -62,6 +62,54 @@ Alex -
 Mehul - 
 Isaac - GUI and save/loading and smart seating algorithims.
 
+## Deliverable 4
+
+### Reflection
+
+#### How did your design absorb the change?
+
+
+
+#### Did the change cross the model/view line?
+
+
+
+#### What changed from your D3 plan?
+
+- Wait time uses a per-party-size dining-time table instead of a single average wait time.
+- Seating throws `OperationNotSupportedException` when the waitlist is empty or no table fits. Before the plan was to only “tell the user via a text display,” which is now also done with the exception message.
+
+#### What doesn't work yet?
+
+- Menu options 4 (clear table) and 6 (show tables) are stubs.
+- Add party does not collect name/size; it always enqueues `"Demo party"` of size 5 (awkward with default capacity-4 tables).
+- JavaFX GUI scaffolding exists but is not fully implemented.
+- Save/load is not implemented.
+- Max waitlist size and configurable table count are still open.
+
+### Next Steps
+
+#### What is left for the final build?
+
+1. Complete controller class.
+2. Implement table clearing.
+3. Complete GUI and linking to controller.
+4. Complete saving/loading.
+
+#### Which stretch goals are you committing to, and which are you dropping?
+
+Committing: MVP completeness and GUI, as well as saving and loading.
+
+#### What will your 3-minute demo show?
+
+
+
+#### Who does what?
+
+- Alex — 
+- Mehul — 
+- Isaac — GUI, save/load, seating/wait-estimate improvement
+
 ## Attribution
 
 | File                  | Contributors | How         |
