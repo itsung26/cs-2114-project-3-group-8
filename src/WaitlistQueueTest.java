@@ -158,6 +158,19 @@ public class WaitlistQueueTest {
     }
 
     /**
+     * Verifies that {@link WaitlistQueue#clear()} on an empty queue does
+     * not throw and leaves the queue empty.
+     */
+    @Test
+    void testClearEmptyQueue() {
+        queue.clear();
+
+        assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+        assertEquals("[]", queue.toString());
+    }
+
+    /**
      * Verifies that the queue still works when items are added again after
      * it has been cleared.
      */
